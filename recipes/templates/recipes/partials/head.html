@@ -10,6 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
   <style>
     :root {
+
+      --shadow-recipe-medium: -5px 5px 10px rgba(0, 0, 0, .2);
+      --shadow-recipe-large: -10px 10px 15px rgba(0, 0, 0, .3);
+
       --border-radius-input: .9rem;
       --border-radius-input-right: 0 .9rem .9rem 0;
 
@@ -33,7 +37,7 @@
 
       --color-translucid-gold: rgba(231, 247, 8, 0.2);
       --color-gold: #ffbf00;
-      --color-gold-dark: #a67c00;
+      --color-gold-dark: #deaa0f;
       --color-gold-light: #ffd447;
 
       --color-info-dark: #4d86c4;
@@ -75,6 +79,7 @@
       font-family: var(--font-primary);
       font-size: 1.6rem;
       background: var(--color-gray-1);
+      color: var(--color-dark-text);
     }
 
     h1,
@@ -110,10 +115,12 @@
 
     .main-logo-icon {
       margin-right: 2rem;
+      color: var(--color-gold);
     }
 
     .main-logo-text {
       font-family: var(--font-headings);
+      color: var(--color-gold);
     }
 
     .search-input,
@@ -134,6 +141,7 @@
       position: absolute;
       top: 0;
       right: 0;
+      color: var(--color-gold-dark);
     }
 
     .search-button:focus {
@@ -143,7 +151,7 @@
     }
 
     .search-form {
-      border: .2rem solid var(--color-primary-dark);
+      border: .2rem solid var(--color-gold-dark);
       max-width: 64rem;
       margin: 0 auto;
       border-radius: var(--border-radius-input);
@@ -158,6 +166,121 @@
 
     .search-form:focus-within .search-button {
       color: var(--color-gold);
+    }
+
+    .main-content {
+      padding-top: 0;
+
+    }
+
+    .main-content-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: var(--spacing-gutter-large);
+    }
+
+    .recipe {
+      background: var(--color-white);
+      box-shadow: var(--shadow-recipe-medium);
+      transform: scale(1);
+      transition: all 300ms ease-in-out;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .recipe img {
+      max-width: 100%;
+    }
+
+    .recipe-list-item {
+      max-width: 64rem;
+    }
+
+    .recipe-list-item:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-recipe-large);
+    }
+
+    .recipe-title-container {
+      padding: var(--spacing-gutter-medium);
+      padding-bottom: calc(var(--spacing-gutter-medium) / 2);
+    }
+
+    .recipe-author {
+      padding: 0 var(--spacing-gutter-medium);
+    }
+
+    .recipe-author a {
+      color: var(--color-gold-dark);
+      transition: all 300ms ease-in-out;
+      text-decoration: none;
+    }
+
+    .recipe-author a:hover {
+      color: var(--color-gold);
+    }
+
+    .recipe-author-item {
+      color: var(--color-gray-4);
+      margin-right: 1rem;
+    }
+
+    .recipe-content {
+      padding: var(--spacing-gutter-medium);
+      padding-top: calc(var(--spacing-gutter-medium) / 2);
+    }
+
+    .recipe-meta-container {
+      display: flex;
+      flex-flow: row wrap;
+      padding: var(--spacing-gutter-medium);
+      background: var(--color-gray-2);
+    }
+
+    .recipe-meta {
+      display: flex;
+      flex-flow: column nowrap;
+      flex-shrink: 1;
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .recipe-meta-title {
+      font-size: 1.6rem;
+    }
+
+    .recipe-footer a {
+      background: var(--color-primary-dark);
+      display: block;
+      color: var(--color-white);
+      text-decoration: none;
+      text-align: center;
+      padding: 1.5rem var(--spacing-gutter-medium);
+      cursor: pointer;
+      transition: all 300ms ease-in-out;
+    }
+
+    .recipe-footer a:hover {
+      filter: brightness(2);
+    }
+
+    .main-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-primary-dark);
+      color: var(--color-gold);
+      padding: var(--spacing-gutter-large);
+    }
+
+    .main-footer a {
+      color: var(--color-gold);
+      text-decoration: none;
+      transition: all 300ms ease-in-out;
+    }
+
+    .main-footer a:hover {
+      color: var(--color-white);
     }
   </style>
 </head>
