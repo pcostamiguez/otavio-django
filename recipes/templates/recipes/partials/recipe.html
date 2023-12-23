@@ -3,7 +3,7 @@
     <img src="{{ recipe.cover.url }}" alt="Imagem">
     <div class="recipe-title-container">
       <h2 class="recipe-title">
-        {{ recipe.title|truncatechars:20 }}
+        {{ recipe.title }}
       </h2>
     </div>
 
@@ -29,7 +29,11 @@
 
     <div class="recipe-content">
       <p>
-      {{ recipe.description|truncatechars:240 }}
+      {% if is_detail_page is True %}
+        {{ recipe.description }}
+      {% else %}
+        {{ recipe.description|truncatechars:240 }}
+      {% endif %}
       </p>
     </div>
 
@@ -55,11 +59,26 @@
       </div>
     </div>
 
+    {% if is_detail_page is True %}
+      <div class="preparation">
+        <p>
+          {{ recipe.preparation_steps|linebreaks }}
+        </p>
+      </div>
+    {% endif %}
+
     <div class="recipe-footer">
+    {% if is_detail_page is not True %}
       <a class="recipe-read-more button button-dark button-full-width" href="/recipes/1">
         <i class="fas fa-eye"></i>
         <span>ver mais...</span>
       </a>
+    {% else %}
+      <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes-home' %}">
+        <i class="fas fa-arrow-left"></i>
+        <span>voltar</span>
+      </a>
+    {% endif %}
     </div>
 
   </div>
