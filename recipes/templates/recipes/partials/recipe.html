@@ -1,9 +1,13 @@
 <div class="recipe recipe-list-item">
   <div class="recipe-cover">
-    <img src="{{ recipe.cover.url }}" alt="Imagem">
+    <a href="{% url 'recipes:detail' recipe.id %}">
+      <img src="{{ recipe.cover.url }}" alt="Imagem">
+    </a>
     <div class="recipe-title-container">
       <h2 class="recipe-title">
-        {{ recipe.title }}
+        <a href="{% url 'recipes:detail' recipe.id %}">
+          {{ recipe.title }}
+        </a>
       </h2>
     </div>
 
@@ -69,12 +73,12 @@
 
     <div class="recipe-footer">
     {% if is_detail_page is not True %}
-      <a class="recipe-read-more button button-dark button-full-width" href="/recipes/1">
+      <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:detail' recipe.id %}">
         <i class="fas fa-eye"></i>
         <span>ver mais...</span>
       </a>
     {% else %}
-      <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes-home' %}">
+      <a class="recipe-read-more button button-dark button-full-width" href="{% url 'recipes:home' %}">
         <i class="fas fa-arrow-left"></i>
         <span>voltar</span>
       </a>
