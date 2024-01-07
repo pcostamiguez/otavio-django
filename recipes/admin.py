@@ -1,16 +1,19 @@
 from django.contrib import admin
+from reversion.admin import VersionAdmin
+from simple_history.admin import SimpleHistoryAdmin
 from .models import Category, Recipe
 
 # admin.site.site_header = 'Recipe Admin'
 
 
-@admin.register(Recipe)  # outra forma de registrar no admin
-class RecipeAdmin(admin.ModelAdmin):
+class RecipeAdmin(VersionAdmin):
     ...
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(VersionAdmin):
     ...
 
 
+# admin.site.register(Category, CategoryAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Recipe, RecipeAdmin)
