@@ -48,7 +48,7 @@ class Recipe(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        old_image_path = self.cover.path if self.pk else None
+        # old_image_path = self.cover.path if self.pk else None
 
         super().save(*args, **kwargs)
 
@@ -58,20 +58,19 @@ class Recipe(models.Model):
             img = Image.open(self.cover.path)
 
             # Dimensões desejadas para o crop
-            target_width = 800
-            target_height = 600
+            width = 800
+            height = 600
 
-            # Redimensiona a imagem para garantir que ela se encaixe nas dimensões desejadas
-            img_resized = img.resize((target_width, target_height), Image.LANCZOS)
+            img_resized = img.resize((width, height), Image.LANCZOS)
 
             # Obtém as dimensões da imagem redimensionada
             img_width, img_height = img_resized.size
 
             # Calcula as coordenadas para cortar a imagem centralizada
-            left = max(0, (img_width - target_width) // 2)
-            top = max(0, (img_height - target_height) // 2)
-            right = min(img_width, left + target_width)
-            bottom = min(img_height, top + target_height)
+            left = max(0, (img_width - width) // 2)
+            top = max(0, (img_height - height) // 2)
+            right = min(img_width, left + width)
+            bottom = min(img_height, top + height)
 
             # Corta a imagem redimensionada
             img_cropped = img_resized.crop((left, top, right, bottom))
@@ -79,5 +78,5 @@ class Recipe(models.Model):
             # Salva a imagem cortada
             img_cropped.save(self.cover.path)
 
-        if old_image_path and os.path.exists(old_image_path):
-            os.remove(old_image_path)
+        # if old_image_path and os.path.exists(old_image_path) and self.cover:
+        #     os.remove(old_image_path)
