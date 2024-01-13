@@ -1,6 +1,5 @@
 from django.contrib import admin
 from reversion.admin import VersionAdmin
-from simple_history.admin import SimpleHistoryAdmin
 from .models import Category, Recipe
 
 # admin.site.site_header = 'Recipe Admin'
