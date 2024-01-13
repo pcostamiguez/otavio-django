@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
-import os
 
 
 def recipe_directory_path(instance, filename):
@@ -27,7 +26,7 @@ class Recipe(models.Model):
                                      verbose_name='medida do rendimento')
     preparation_steps = models.TextField(verbose_name='receita')
     preparation_steps_is_html = models.BooleanField(default=False,
-                                                    verbose_name='receita em html?')
+                                                    verbose_name='html?')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False,
@@ -41,8 +40,7 @@ class Recipe(models.Model):
     )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True,
-        verbose_name='autor'
-    )
+        verbose_name='autor')
 
     def __str__(self):
         return self.title
