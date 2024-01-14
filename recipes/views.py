@@ -1,17 +1,23 @@
 from django.http import Http404
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from recipes.models import Recipe
+from django.core.paginator import Paginator
 
 
 def home(request):
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
+
+    paginator = Paginator(recipes, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'recipes/pages/home.html', context={
-        'recipes': recipes,
+        "page_obj": page_obj,
     })
 
 
 def search(request):
-    search_term = request.GET.get('search')
+    search_term = request.GET.get('search', '').strip()
 
     if not search_term:
         raise Http404()
@@ -20,9 +26,14 @@ def search(request):
         title__icontains=search_term,
         is_published=True).order_by('title')
 
+    paginator = Paginator(recipes, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'recipes/pages/search_results.html',
                   context={
-                      'recipes': recipes,
+                      'page_obj': page_obj,
+                      'search_term': search_term,
                   })
 
 
